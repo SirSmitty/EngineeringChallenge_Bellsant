@@ -1,5 +1,5 @@
-import express, {Request, Response} from 'express';
-import {getMachineHealth} from './machineHealth';
+import express, { Request, Response } from 'express';
+import { getMachineHealth } from './machineHealth';
 
 const app = express();
 const port = 3001;
@@ -9,6 +9,7 @@ app.use(express.json());
 
 // Endpoint to get machine health score
 app.post('/machine-health', (req: Request, res: Response) => {
+  console.log(req.body)
   const result = getMachineHealth(req);
   if (result.error) {
     res.status(400).json(result);

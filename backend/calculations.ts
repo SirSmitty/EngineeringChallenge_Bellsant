@@ -1,5 +1,5 @@
 import machineData from '../native-app/data/machineData.json';
-import {MachineType, partInfo} from '../native-app/data/types';
+import { MachineType, partInfo } from '../native-app/data/types';
 
 const machineDataTyped = machineData as Record<
   MachineType,
@@ -19,7 +19,7 @@ function linearScale(
   // Calculate the scaled value
   const scaledValue =
     ((clampedValue - inputMin) / (inputMax - inputMin)) *
-      (outputMax - outputMin) +
+    (outputMax - outputMin) +
     outputMin;
 
   return scaledValue;
@@ -35,11 +35,11 @@ export function calculatePartHealth(
     return 0; // Handle cases where the machine name is not found in machineData
   }
 
-  const {value} = part;
+  const { value } = part;
   if (!machineInfo[part.name]) {
     return -1;
   }
-  const {normalRange, abnormalRange, optimalRange} = machineInfo[part.name];
+  const { normalRange, abnormalRange, optimalRange } = machineInfo[part.name];
 
   if (value >= normalRange[0] && value <= normalRange[1]) {
     // Linearly scale the score between 50 and 100 based on the distance from normal to optimal
@@ -67,6 +67,7 @@ export function calculateMachineHealth(
   const partScores = parts.map((part) =>
     calculatePartHealth(machineName, part),
   );
+  console.log("part scores", partScores)
 
   const totalScore = partScores.reduce((sum, score) => {
     if (score === -1) {
@@ -76,8 +77,10 @@ export function calculateMachineHealth(
     return sum + score;
   }, 0);
 
+  console.log("partscounter", partsCounter)
   if (partsCounter === 0) {
     return 0;
   }
+  console.log("machine score", totalScore / partsCounter)
   return totalScore / partsCounter;
 }

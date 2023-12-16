@@ -1,23 +1,22 @@
-import {Button, Platform, StyleSheet} from 'react-native';
-import {Text, View} from '../../components/Themed';
-import {Link, useFocusEffect} from 'expo-router';
+import { Button, Platform, StyleSheet } from 'react-native';
+import { Text, View } from '../../components/Themed';
+import { Link, useFocusEffect } from 'expo-router';
 import axios from 'axios';
-import {useMachineData} from '../useMachineData';
-import {useCallback, useState} from 'react';
-import {PartsOfMachine} from '../../components/PartsOfMachine';
-import {MachineScore} from '../../components/MachineScore';
+import { useMachineData } from '../useMachineData';
+import { useCallback, useState } from 'react';
+import { PartsOfMachine } from '../../components/PartsOfMachine';
+import { MachineScore } from '../../components/MachineScore';
 
 let apiUrl: string =
   'https://fancy-dolphin-65b07b.netlify.app/api/machine-health';
 
 if (__DEV__) {
-  apiUrl = `http://${
-    Platform?.OS === 'android' ? '10.0.2.2' : 'localhost'
-  }:3001/machine-health`;
+  apiUrl = `http://${Platform?.OS === 'android' ? '10.0.2.2' : 'localhost'
+    }:3001/machine-health`;
 }
 
 export default function StateScreen() {
-  const {machineData, resetMachineData, loadMachineData, setScores} =
+  const { machineData, resetMachineData, loadMachineData, setScores } =
     useMachineData();
 
   //Doing this because we're not using central state like redux
@@ -34,15 +33,15 @@ export default function StateScreen() {
       });
 
       if (response.data?.factory) {
+        console.log("scores", response.data)
         setScores(response.data);
       }
     } catch (error) {
       console.error(error);
       console.log(
-        `There was an error calculating health. ${
-          error.toString() === 'AxiosError: Network Error'
-            ? 'Is the api server started?'
-            : error
+        `There was an error calculating health. ${error.toString() === 'AxiosError: Network Error'
+          ? 'Is the api server started?'
+          : error
         }`,
       );
     }
@@ -141,7 +140,7 @@ const styles = StyleSheet.create({
     paddingBottom: 15,
   },
   linkText: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#2e78b7',
   },
   resetButton: {

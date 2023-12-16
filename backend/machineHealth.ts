@@ -1,4 +1,4 @@
-import {Request} from 'express';
+import { Request } from 'express';
 import {
   AssemblyLinePart,
   MachineType,
@@ -7,7 +7,7 @@ import {
   WeldingRobotPart,
   partInfo,
 } from '../native-app/data/types';
-import {calculateMachineHealth} from './calculations';
+import { calculateMachineHealth } from './calculations';
 
 export const getMachineHealth = (req: Request) => {
   /* Assuming the request body contains the machine's name and parts data in the format of
@@ -23,6 +23,7 @@ export const getMachineHealth = (req: Request) => {
     }
   }
   */
+  console.log("inside the getMachineHealth")
   const {
     machines,
   }: {
@@ -39,7 +40,7 @@ export const getMachineHealth = (req: Request) => {
   } = req.body;
 
   if (!machines) {
-    return {error: 'Invalid input format'};
+    return { error: 'Invalid input format' };
   }
 
   const machineScores: {
@@ -69,6 +70,7 @@ export const getMachineHealth = (req: Request) => {
           name: partNameTyped,
           value: parseFloat(machine[partNameTyped]),
         });
+        console.log(parts)
         return parts;
       }, []),
     );
@@ -78,6 +80,8 @@ export const getMachineHealth = (req: Request) => {
     factoryScore += machineScore;
     machineCount++;
   }
+  console.log("factoryscore", factoryScore)
+  console.log("machine count", machineCount)
 
   // Calculate the factory score (average of machine scores)
   factoryScore = machineCount > 0 ? factoryScore / machineCount : 0;

@@ -13,7 +13,10 @@
   "author": "BellSant",
   "dependencies": {
     "@netlify/functions": "^2.0.2",
+    "@react-native-async-storage/async-storage": "^1.21.0",
+    "expo": "^49.0.21",
     "express": "^4.17.1",
+    "install": "^0.13.0",
     "serverless-http": "^3.2.0",
     "typescript": "^5.2.2"
   },
