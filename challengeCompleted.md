@@ -18,7 +18,7 @@
 </p>
 <h4>Running the App Locally</h4>
 <p>
-  I have downloaded new libraries on both the frontend and the backend, so please run <strong>yarn install</strong> in <strong>both</strong> the native-app and backend folders.
+  I have downloaded new libraries on both the frontend and the backend, so please run <strong>yarn install in both the native-app and backend folders </strong>.
 </p>
 <h4>
   Thank you once more for the opportunity, and I hope to hear from you soon!
